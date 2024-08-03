@@ -1,0 +1,16 @@
+---
+- hosts: instances
+  become: true
+  tasks:
+    - name: Install httpd
+      yum:
+        name: httpd
+        state: latest
+
+    - name: Create the index file
+      command: echo "This is mywebserver" > /var/www/html/index.html
+
+    - name: Restart the service
+      service:
+         name: httpd 
+         state: restarted
