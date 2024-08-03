@@ -19,6 +19,10 @@ resource "aws_instance" "myec2" {
     command     = "echo ${self.public_ip} >> ./ansible-first-run/hosts"
   }
 
+  provisioner "local-exec" {
+    command     = "ansible-playbook ./ansible-first-run/webserver.yml"
+  }
+
   tags = {
     Name = "Linux_instance"
   }
