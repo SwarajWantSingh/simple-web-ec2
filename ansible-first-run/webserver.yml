@@ -1,5 +1,5 @@
 ---
-- hosts: instances
+- hosts: instance
   become: true
   tasks:
     - name: Install httpd
@@ -8,7 +8,10 @@
         state: latest
 
     - name: Create the index file
-      command: echo "This is mywebserver" > /var/www/html/index.html
+      copy:
+        dest: /var/www/html/index.html
+        content: This is first server
+
 
     - name: Restart the service
       service:
